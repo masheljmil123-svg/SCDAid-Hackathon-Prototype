@@ -150,7 +150,7 @@ export function PatientAssessment({
           <h1>Patient Assessment</h1>
           <p>
             {caseLabel
-              ? `Pre-filled demo case: ${caseLabel}. Browse each section, then view the predefined recommendation.`
+              ? `Pre-filled demo case: ${caseLabel}. Edit supported inputs, then run the SCDAid v2.1 simulation.`
               : 'Enter clinician inputs to generate individualized opioid guidance.'}
           </p>
         </div>
@@ -164,7 +164,7 @@ export function PatientAssessment({
 
       {readOnly && (
         <div className="form-banner form-banner--demo" role="status">
-          Demo fields are locked so the predefined recommendation stays matched to this case.
+          Demo fields are locked for this view.
         </div>
       )}
 
@@ -1069,7 +1069,7 @@ export function PatientAssessment({
       <div className="assess-actions">
         {!readOnly && (
           <button type="button" className="btn btn-ghost" onClick={onClear} disabled={loading}>
-            Clear
+            Reset case
           </button>
         )}
         <button type="submit" className="btn btn-primary" disabled={loading}>

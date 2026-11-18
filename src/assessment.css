@@ -994,19 +994,121 @@
 }
 
 .dose-card {
-  padding-top: 4px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid #d7e4db;
+  border-radius: 10px;
+  background: #f5faf7;
 }
 
 .dose-card h3 {
-  margin-bottom: 8px;
+  margin: 0 0 4px;
   font-size: 12px;
   color: #355246;
 }
 
+.dose-card--guidance {
+  background: #f7f8fa;
+  border-color: var(--border);
+}
+
+.dose-card--unavailable {
+  background: #fff8f1;
+  border-color: #f0d7b8;
+}
+
+.dose-layer-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #5b7266;
+}
+
+.dose-value {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1f3d32;
+}
+
 .dose-note {
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 11px;
   color: #5b7266;
+}
+
+.eligibility-layer {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed #d7e4db;
+}
+
+.calc-panel h3 {
+  margin: 16px 0 8px;
+  font-size: 14px;
+}
+
+.calc-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.calc-list li {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.calc-list strong,
+.calc-list span,
+.calc-list em,
+.calc-list small {
+  overflow-wrap: anywhere;
+}
+
+.calc-list em,
+.calc-list small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.alt-detail {
+  padding: 0 12px 12px;
+}
+
+.alt-detail .dose-card {
+  margin-top: 8px;
+}
+
+[data-theme='dark'] .dose-card {
+  background: #1c2a24;
+  border-color: #2f453b;
+}
+
+[data-theme='dark'] .dose-card h3,
+[data-theme='dark'] .dose-value {
+  color: #d7ebe0;
+}
+
+[data-theme='dark'] .dose-card--unavailable {
+  background: #2a2418;
+  border-color: #5a4a2e;
+}
+
+[data-theme='dark'] .dose-layer-label,
+[data-theme='dark'] .dose-note {
+  color: #9bb0a4;
+}
+
+[data-theme='dark'] .eligibility-layer {
+  border-top-color: #2f453b;
 }
 
 .eligibility-badge {
@@ -1780,5 +1882,401 @@
   .dynamic-row--opioid,
   .dynamic-row--pair {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Compact clinical decision-support results */
+.results--cds .results-head {
+  margin-bottom: 10px;
+}
+
+.results--cds .results-head h1 {
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+.cds-disclaimer {
+  margin-top: 2px !important;
+  font-size: 11.5px !important;
+  color: var(--muted) !important;
+}
+
+.cds-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cds-body.is-dim {
+  opacity: 0.55;
+}
+
+.cds-top {
+  padding: 12px 14px;
+  border: 1px solid #b8e0c8;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f3fbf6 0%, #eaf7ef 100%);
+}
+
+.cds-top-bar,
+.cds-drug,
+.cds-alt-main,
+.cds-review-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cds-kicker,
+.cds-label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #5f7468;
+}
+
+.cds-drug {
+  justify-content: flex-start;
+  margin: 8px 0 10px;
+}
+
+.cds-check {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #c8edd8;
+  color: #0f7a49;
+  flex-shrink: 0;
+}
+
+.cds-drug h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #145c38;
+}
+
+.cds-drug p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #5b7266;
+}
+
+.cds-dose {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid #d5ebdd;
+}
+
+.cds-dose strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #12382a;
+}
+
+.cds-dose em {
+  display: block;
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: #7a5a2b;
+  font-style: normal;
+}
+
+.cds-dose.is-unavailable {
+  background: #fff7eb;
+  border-color: #efd2a8;
+}
+
+.cds-dose.is-unavailable strong {
+  color: #8a5a12;
+}
+
+.cds-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.cds-metrics > div {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid #dce9e1;
+}
+
+.cds-metrics strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 18px;
+  color: #145c38;
+}
+
+.cds-unit {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5b7266;
+}
+
+.cds-horizon {
+  font-size: 13px !important;
+  line-height: 1.35;
+  color: #1f3d32 !important;
+}
+
+.cds-review {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #f0c2bf;
+  background: #fff5f4;
+}
+
+.cds-review-top {
+  justify-content: flex-start;
+  color: #b42318;
+  margin-bottom: 6px;
+}
+
+.cds-review h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #8f1d14;
+}
+
+.cds-review p {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: #5c2b27;
+}
+
+.cds-section h3 {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cds-section p {
+  margin: 0 0 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.cds-muted {
+  color: var(--muted) !important;
+  font-size: 12px !important;
+}
+
+.cds-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cds-badge--eligible {
+  background: #d7f3e4;
+  color: #0f7a49;
+}
+
+.cds-badge--caution {
+  background: #fff3d6;
+  color: #b45309;
+}
+
+.cds-badge--avoid {
+  background: #fde8e8;
+  color: #b42318;
+}
+
+.cds-alt-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.cds-alt-row {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fafbfc;
+}
+
+.cds-alt-row--avoid {
+  background: #fcf7f7;
+  border-color: #f0d8d6;
+  opacity: 0.92;
+}
+
+.cds-alt-main strong {
+  font-size: 13.5px;
+  color: var(--ink);
+}
+
+.cds-alt-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.cds-avoid-block {
+  margin-top: 8px;
+}
+
+.cds-avoid-block > .cds-label {
+  margin-bottom: 4px;
+  color: #9b3b34;
+}
+
+.cds-alerts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.cds-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+.cds-alert-dot {
+  width: 7px;
+  height: 7px;
+  margin-top: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cds-alert--critical {
+  background: #fde8e8;
+  color: #8f1d14;
+}
+
+.cds-alert--critical .cds-alert-dot {
+  background: #b42318;
+}
+
+.cds-alert--warning {
+  background: #fff3d6;
+  color: #8a4b08;
+}
+
+.cds-alert--warning .cds-alert-dot {
+  background: #d97706;
+}
+
+.cds-alert--info {
+  background: #eef3f8;
+  color: #334155;
+}
+
+.cds-alert--info .cds-alert-dot {
+  background: #64748b;
+}
+
+.cds-monitor p {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.cds-monitor svg {
+  margin-top: 2px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.cds-tech {
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+}
+
+.cds-tech summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--muted);
+}
+
+.cds-tech summary::-webkit-details-marker {
+  display: none;
+}
+
+.cds-tech[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.cds-tech-body {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.cds-tech-findings {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  display: grid;
+  gap: 3px;
+}
+
+.calc-panel--nested {
+  margin: 0;
+  padding: 0;
+}
+
+.calc-panel--nested .results-block-title {
+  margin-top: 4px;
+}
+
+@media (max-width: 900px) {
+  .cds-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .cds-drug h2 {
+    font-size: 20px;
+  }
+}
+
+@container assess (max-width: 520px) {
+  .cds-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .cds-alt-main {
+    flex-wrap: wrap;
   }
 }

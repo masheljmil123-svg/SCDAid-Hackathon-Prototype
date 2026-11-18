@@ -1,0 +1,116 @@
+{
+  "description": "Website-side expected results that supersede five cases in the v2.1 research file dose_test_cases.json after the 2026-11-13 renal and hepatic safety corrections. The research file itself is unchanged for traceability. All other research cases keep their original expected results.",
+  "date": "2026-11-13",
+  "supersedes": [
+    {
+      "id": "TC03",
+      "drug_route": "MORPHINE_IV",
+      "was": "dose 3.5 mg (range 3.5-5.0) via R1 x0.50-0.75 at eGFR 45",
+      "reason": "R1 removed: only source is a secondary table (Aronoff 1999) for GFR 10-50; the morphine label gives no number (\"lower than normal dosage\"). Clinician review.",
+      "expected": {
+        "status": "NOT_CALCULATED_CLINICIAN_REVIEW",
+        "dose": null,
+        "dose_range": null,
+        "interval": null,
+        "max_daily_mg": null,
+        "escalation_dose": null,
+        "maintenance_range": null,
+        "maintenance_interval": null,
+        "rules": [
+          "R1"
+        ],
+        "flags": [
+          "RENAL_DOSE_NOT_CALCULATED"
+        ]
+      }
+    },
+    {
+      "id": "TC17",
+      "drug_route": "MORPHINE_PO",
+      "was": "dose 7.5 mg (range 7.5-22.5) via R1 at eGFR 40",
+      "reason": "R1 removed (as TC03). Clinician review.",
+      "expected": {
+        "status": "NOT_CALCULATED_CLINICIAN_REVIEW",
+        "dose": null,
+        "dose_range": null,
+        "interval": null,
+        "max_daily_mg": null,
+        "escalation_dose": null,
+        "maintenance_range": null,
+        "maintenance_interval": null,
+        "rules": [
+          "R1"
+        ],
+        "flags": [
+          "RENAL_DOSE_NOT_CALCULATED"
+        ]
+      }
+    },
+    {
+      "id": "TC18",
+      "drug_route": "OXYCODONE_PO",
+      "was": "dose 2.5 mg (range 2.5-7.5) via H3 x1/3-1/2, severe hepatic",
+      "reason": "H3 removed: the 1/3-1/2 fraction is from the extended-release oxycodone label; the immediate-release label says only \"lower than usual dosage\". Clinician review.",
+      "expected": {
+        "status": "NOT_CALCULATED_CLINICIAN_REVIEW",
+        "dose": null,
+        "dose_range": null,
+        "interval": null,
+        "max_daily_mg": null,
+        "escalation_dose": null,
+        "maintenance_range": null,
+        "maintenance_interval": null,
+        "rules": [
+          "H3"
+        ],
+        "flags": [
+          "HEPATIC_DOSE_NOT_CALCULATED"
+        ]
+      }
+    },
+    {
+      "id": "TC22",
+      "drug_route": "TRAMADOL_PO",
+      "was": "50 mg every 12 h, max 100 mg/day via TO4, mild/moderate hepatic",
+      "reason": "The tramadol label (Ultram 02/2023) gives 50 mg every 12 h for severe hepatic impairment only; applying it to mild/moderate was an unapproved extrapolation (D17). Clinician review (TO4M). TO4 still applies to severe.",
+      "expected": {
+        "status": "NOT_CALCULATED_CLINICIAN_REVIEW",
+        "dose": null,
+        "dose_range": null,
+        "interval": null,
+        "max_daily_mg": null,
+        "escalation_dose": null,
+        "maintenance_range": null,
+        "maintenance_interval": null,
+        "rules": [
+          "TO4M"
+        ],
+        "flags": [
+          "HEPATIC_DOSE_NOT_CALCULATED"
+        ]
+      }
+    },
+    {
+      "id": "TC34",
+      "drug_route": "MORPHINE_IV",
+      "was": "dose 6.5 mg with maintenance interval x2 via H1, severe hepatic",
+      "reason": "H1 removed: interval doubling is from a secondary table only; the morphine label says \"lower than normal dosage\" with no number. Clinician review.",
+      "expected": {
+        "status": "NOT_CALCULATED_CLINICIAN_REVIEW",
+        "dose": null,
+        "dose_range": null,
+        "interval": null,
+        "max_daily_mg": null,
+        "escalation_dose": null,
+        "maintenance_range": null,
+        "maintenance_interval": null,
+        "rules": [
+          "H1"
+        ],
+        "flags": [
+          "HEPATIC_DOSE_NOT_CALCULATED"
+        ]
+      }
+    }
+  ]
+}

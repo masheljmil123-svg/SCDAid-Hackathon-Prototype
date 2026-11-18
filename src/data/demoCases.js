@@ -1,14 +1,16 @@
 /**
- * Predefined demonstration cases for the SCDAid prototype.
- * Fictional patients only. Results are static demo outputs — the live v2.1 model is not run here.
+ * Fictional demonstration cases for the SCDAid prototype.
+ * Forms pre-fill the assessment UI. Recommendations are produced at runtime by the
+ * verified SCDAid v2.1 Linear Regression pipeline (see data/recommendation.js).
+ * Any legacy `result` blobs below are unused display fixtures and are not the live path.
  */
 
 import { EMPTY_FORM } from './formState.js'
 
-export const DEMO_BANNER = 'Prototype demo · predefined cases'
+export const DEMO_BANNER = 'Prototype demo · fictional cases · SCDAid v2.1 simulation'
 
 const DEMO_DISCLAIMER =
-  'Predefined demonstration result for this SCDAid prototype. Not a live model run and not a prescription.'
+  'Simulated SCDAid v2.1 demonstration result. Research-only — not a live clinical order and not clinically validated.'
 
 function baseForm(overrides) {
   return {

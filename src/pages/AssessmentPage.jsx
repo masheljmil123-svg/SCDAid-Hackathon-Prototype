@@ -8,8 +8,9 @@ import { RecommendationResults } from '../components/RecommendationResults.jsx'
 import { WorkspacePanel } from '../components/WorkspacePanel.jsx'
 import { DemoBanner } from '../components/DemoBanner.jsx'
 import { Footer } from '../components/Footer.jsx'
-import { countCompletedSections } from '../data/formState.js'
-import { LOADING_STEPS } from '../data/recommendation.js'
+import { countCompletedSections, validateForm } from '../data/formState.js'
+import { LOADING_STEPS, buildRecommendation } from '../data/recommendation.js'
+import { formForRecommendation } from '../logic/calc/apply.js'
 import { getDemoCase } from '../data/demoCases.js'
 
 export function AssessmentPage() {
@@ -17,6 +18,7 @@ export function AssessmentPage() {
   const demoCase = getDemoCase(caseId)
   const [activePage, setActivePage] = useState('assessment')
   const [form, setForm] = useState(demoCase?.form || null)
+  const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
   const [loadingStep, setLoadingStep] = useState(0)
   const [result, setResult] = useState(null)
@@ -32,40 +34,84 @@ export function AssessmentPage() {
   useEffect(() => {
     if (!demoCase) return
     clearTimers()
-    setForm(demoCase.form)
+    setForm(structuredClone(demoCase.form))
+    setErrors({})
     setResult(null)
     setLoading(false)
     setLoadingStep(0)
     setActivePage('assessment')
   }, [caseId, clearTimers, demoCase])
 
-  const onChange = useCallback(() => {
-    /* Demo fields are locked; ignore edit attempts. */
+  const onChange = useCallback((key, value) => {
+    setForm((current) => ({ ...current, [key]: value }))
+    setErrors((current) => {
+      if (!current[key]) return current
+      const next = { ...current }
+      delete next[key]
+      return next
+    })
   }, [])
+
+  const onClear = useCallback(() => {
+    if (!demoCase) return
+    clearTimers()
+    setForm(structuredClone(demoCase.form))
+    setErrors({})
+    setResult(null)
+    setLoading(false)
+    setLoadingStep(0)
+  }, [clearTimers, demoCase])
 
   const onNavigate = useCallback((id) => {
     setActivePage(id)
   }, [])
 
   const onSubmit = useCallback(() => {
-    if (!demoCase || loading) return
+    if (!demoCase || !form || loading) return
+
+    const nextErrors = validateForm(formForRecommendation(form).form)
+    setErrors(nextErrors)
+    if (Object.keys(nextErrors).length > 0) return
+
     clearTimers()
     setResult(null)
     setLoading(true)
     setLoadingStep(0)
 
+    const recommendationPromise = buildRecommendation(form)
+
     LOADING_STEPS.forEach((_, index) => {
-      const id = window.setTimeout(() => {
+      const id = window.setTimeout(async () => {
         if (index < LOADING_STEPS.length - 1) {
           setLoadingStep(index + 1)
           return
         }
-        setResult(demoCase.result)
-        setLoading(false)
+        try {
+          const nextResult = await recommendationPromise
+          setResult(nextResult)
+        } catch (error) {
+          setResult({
+            disclaimer:
+              'Simulation-based proof-of-concept. Not clinically validated.',
+            preferred: null,
+            alternatives: [],
+            error: error?.message || 'Unable to generate a recommendation.',
+            explanation: { disclaimer: '', findings: [] },
+            followUp: {
+              timing: 'Reassess after clinician review',
+              message: 'No opioid ranking was produced for this pathway.',
+            },
+            pgx: null,
+            safety: null,
+            doseProposals: [],
+          })
+        } finally {
+          setLoading(false)
+        }
       }, (index + 1) * 420)
       timersRef.current.push(id)
     })
-  }, [clearTimers, demoCase, loading])
+  }, [clearTimers, demoCase, form, loading])
 
   if (!demoCase) return <Navigate to="/demo" replace />
   if (!form) return null
@@ -97,20 +143,21 @@ export function AssessmentPage() {
             <>
               <PatientAssessment
                 form={form}
-                errors={{}}
+                errors={errors}
                 progress={progress}
                 loading={loading}
                 onChange={onChange}
-                onClear={() => {}}
+                onClear={onClear}
                 onSubmit={onSubmit}
-                readOnly
+                readOnly={false}
                 caseLabel={`${demoCase.name} (${demoCase.code})`}
               />
               <aside className="assess-help">
-                <p className="assess-help-title">Demo tip</p>
+                <p className="assess-help-title">Prototype tip</p>
                 <p>
-                  Browse the locked assessment sections, then click Get Recommendation to view
-                  the predefined result for this case.
+                  Fields start from this fictional case. Edit supported inputs, then click Get
+                  Recommendation to run the verified SCDAid v2.1 simulation pipeline. Outputs are
+                  research-only and not clinically validated.
                 </p>
                 <Link className="assess-help-btn" to="/demo">
                   Choose Another Case

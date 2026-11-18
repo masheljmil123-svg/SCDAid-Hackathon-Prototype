@@ -31,8 +31,9 @@ export function InfoSection() {
         <h2>How SCDAid Supports Clinical Decisions</h2>
         <p className="info-lead">
           SCDAid is a bedside decision-support workspace for adult vaso-occlusive
-          crisis analgesia. This prototype lets you walk through predefined
-          patient scenarios and review the recommendation workflow.
+          crisis analgesia. This prototype lets you walk through fictional
+          patient scenarios and review simulated SCDAid v2.1 rankings
+          (research-only, not clinically validated).
         </p>
 
         <ul className="info-grid" id="how">

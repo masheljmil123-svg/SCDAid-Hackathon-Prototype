@@ -17,8 +17,8 @@ export function DemoCasesPage() {
           <h1>Select a Demo Patient</h1>
           <p>
             Four fictional VOC scenarios. Open the full Patient Assessment
-            interface, browse the pre-filled clinical inputs, then view the
-            predefined recommendation.
+            interface, edit supported inputs if needed, then run the SCDAid v2.1
+            simulation pipeline for a research-only ranking.
           </p>
         </header>
 
